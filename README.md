@@ -10,7 +10,7 @@ A modern **Laravel 12** project demonstrating integration of **Elasticsearch**, 
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/laravel-articles-api.git
+git clone git@github.com:Sunny-Ojo/articles-api.git
 cd laravel-articles-api
 
 # Copy environment variables
