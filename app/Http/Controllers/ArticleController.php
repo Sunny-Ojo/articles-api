@@ -35,7 +35,7 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $article = $this->service->store($request->validated());
-        return ApiResponse::success(new ArticleResource($article));
+        return ApiResponse::success(new ArticleResource($article), 'Article created successfully', 201);
     }
 
     public function update(UpdateArticleRequest $request, Article $article)

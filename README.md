@@ -29,3 +29,5 @@ cp .env.example .env
 # Run all tests
 ./vendor/bin/sail artisan test
 ```
+
+### Access the project at http://localhost:8080/api/articles
