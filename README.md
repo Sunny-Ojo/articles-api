@@ -16,10 +16,6 @@ cd laravel-articles-api
 # Copy environment variables
 cp .env.example .env
 
-# Update your .env file (open it in your editor) and set:
-# SCOUT_DRIVER=elastic
-# ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-# QUEUE_CONNECTION=redis
 
 # Start Laravel Sail (Docker)
 ./vendor/bin/sail up -d

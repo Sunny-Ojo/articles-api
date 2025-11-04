@@ -26,7 +26,7 @@ class ArticleController extends Controller
         $article = $this->service->show($slug);
 
         if (! $article) {
-            return response()->json(['message' => 'Article not found'], 404);
+            return ApiResponse::error('Article not found', 404);
         }
 
         return ApiResponse::success(new ArticleResource($article));

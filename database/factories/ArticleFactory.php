@@ -30,4 +30,11 @@ class ArticleFactory extends Factory
             'published_at' => now(),
         ]);
     }
+
+    public function unpublished(): static
+    {
+        return $this->state(fn() => [
+            'published_at' => null,
+        ]);
+    }
 }
