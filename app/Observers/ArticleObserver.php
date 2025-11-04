@@ -5,46 +5,32 @@ namespace App\Observers;
 use App\Jobs\Elasticsearch\IndexArticle;
 use App\Jobs\Elasticsearch\RemoveArticleIndex;
 use App\Models\Article;
+use Illuminate\Support\Facades\Log;
 
 class ArticleObserver
 {
-    /**
-     * Handle the Article "created" event.
-     */
     public function created(Article $article): void
     {
         IndexArticle::dispatch($article);
     }
 
-    /**
-     * Handle the Article "updated" event.
-     */
     public function updated(Article $article): void
     {
         IndexArticle::dispatch($article);
     }
 
-    /**
-     * Handle the Article "deleted" event.
-     */
     public function deleted(Article $article): void
     {
-        RemoveArticleIndex::dispatch($article);
+        RemoveArticleIndex::dispatch($article->id);
     }
 
-    /**
-     * Handle the Article "restored" event.
-     */
     public function restored(Article $article): void
     {
-        IndexArticle::dispatch($article);
+        IndexArticle::dispatch($article->id);
     }
 
-    /**
-     * Handle the Article "force deleted" event.
-     */
     public function forceDeleted(Article $article): void
     {
-        RemoveArticleIndex::dispatch($article);
+        RemoveArticleIndex::dispatch($article->id);
     }
 }

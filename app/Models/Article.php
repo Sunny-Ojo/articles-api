@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\PublishedArticleScope;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -15,12 +16,13 @@ class Article extends Model
 
     public function toSearchableArray(): array
     {
-        return [
-            'title' => $this->title,
-            'content' => $this->content,
-            'author' => $this->author,
-            'published_at' => $this->published_at,
-        ];
+        $array = $this->toArray();
+
+        if (!empty($this->published_at)) {
+            $array['published_at'] = Carbon::parse($this->published_at)->toIso8601String();
+        }
+
+        return $array;
     }
     // public static function booted(): void
     // {
@@ -31,7 +33,7 @@ class Article extends Model
     {
         return $query->whereNull('published_at');
     }
-    
+
     public function scopePublished($query)
     {
         return $query->whereNotNull('published_at');

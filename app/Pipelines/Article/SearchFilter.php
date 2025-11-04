@@ -20,7 +20,6 @@ class SearchFilter
 
         if (filled($searchTerm)) {
             $articleIds = Article::search($searchTerm)->keys();
-            Log::info('SearchFilter found article IDs', ['article_ids' => $articleIds->toArray()]);
             if ($articleIds->isNotEmpty()) {
                 $query->whereIn('id', $articleIds);
             } else {

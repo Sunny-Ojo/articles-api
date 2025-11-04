@@ -3,14 +3,12 @@
 namespace App\Helpers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiResponse
 {
-    public function success(
+    public static function success(
         $data,
         $message = 'Operation Successful',
         $statusCode = Response::HTTP_OK,

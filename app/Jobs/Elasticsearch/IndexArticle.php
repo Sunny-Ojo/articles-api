@@ -3,9 +3,10 @@
 namespace App\Jobs\Elasticsearch;
 
 use App\Models\Article;
+use App\Services\Elasticsearch\ElasticSearchService;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
@@ -14,28 +15,16 @@ class IndexArticle implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(protected Article $article) {}
+    public Article $article;
 
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
+    public function __construct(Article $article)
     {
-        try {
-            $this->article->searchable();
-            Log::info('article indexed successfully', [
-                'article_id' => $this->article->id,
-                'article_name' => $this->article->title
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Failed to index article', [
-                'article_id' => $this->article->id,
-                'error' => $e->getMessage()
-            ]);
-            throw $e;
-        }
+        $this->article = $article;
+    }
+
+    public function handle(ElasticSearchService $elastic): void
+    {
+
+        $elastic->indexArticle($this->article);
     }
 }

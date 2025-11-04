@@ -2,6 +2,6 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    \Matchish\ScoutElasticSearch\ElasticSearchServiceProvider::class
-
+    App\Providers\HorizonServiceProvider::class,
+    Matchish\ScoutElasticSearch\ElasticSearchServiceProvider::class,
 ];
